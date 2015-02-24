@@ -22,10 +22,20 @@ function beginPage(res, title) {
     res.write("<meta charset='utf-8'>\n");
     res.write("<title>"+ title + "</title>\n");
     res.write("<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css'>\n");
+    res.write("<link rel='stylesheet' href='style.css'>\n");
     res.write("<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css'>\n");
     res.write("</head>\n");
     res.write("<body>\n");
-
+    // res.write("<header style='padding:20px;'>\n");
+	res.write("<nav class='navbar navbar-inverse navbar-fixed-top'>\n");
+	res.write("<div class='container'>\n");
+	res.write("<div class='navbar-header'>\n");
+	res.write("<a class='navbar-brand' href='#'>Nudge</a>\n");
+	res.write("</div>\n");
+	res.write("</div>\n");
+	res.write("</nav>\n");
+	res.write("<div class='jumbotron' style='border-bottom:0px;margin-bottom:0px; padding-bottom:0px;'>\n");
+	
 }
 
 function endPage(res) {
@@ -38,19 +48,21 @@ function endPage(res) {
 
 function writeHeading(res, tag, title,tagClass1,tagClass2) {
     res.write(tagClass1+"<" + tag + ">" + title + "</" + tag + ">"+tagClass2+"\n");  
+    res.write("</div>\n");
+    // res.write("</header>\n");
 }
 
 function writePre(res, divClass, data) {
     var escaped = data.replace(/</, "&lt;").
                        replace(/>/, "&gt;");
-	res.write("<div class='jumbotron'>\n");
-    res.write("<div class='container'>\n");
+	// res.write("<div class='jumbotron'>\n");
+    res.write("<div class='container' style='padding-bottom:30px;padding-top:30px'>\n");
     res.write("<div class='" + divClass + "_div'>\n");
     res.write("<pre>");
     res.write(escaped);
     res.write("</pre>\n");
     res.write("</div>\n");
-    res.write("</div>\n");
+    // res.write("</div>\n");	
     res.write("</div>\n");
 
 }
@@ -154,8 +166,9 @@ function gitStatus(res) {
             writePre(res, "error", stderr);
             endPage(res);
         } else {
-        	var tagClass1 ="<div class='container'>";
+        	var tagClass1 ="";
         	var tagClass2 = "</div>";
+        	tagClass2 += "</div>";
             writeHeading(res, "h2", "Git Status",tagClass1,tagClass2);
             writePre(res, "container", stdout);
             gitBranch(res);
@@ -201,8 +214,8 @@ function frontPage(req, res) {
         var title = "Nudge - Web Interface for Git Push";
         var tagClass1 ="<div class='container'>";
         tagClass1+="<div class='page-header'>";
-        var tagClass2 = "</div>";
-        tagClass2 += "</div>";
+        var tagClass2 = "";
+        tagClass2 += "";
         
 
         beginPage(res, title);
