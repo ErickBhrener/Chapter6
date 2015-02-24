@@ -70,12 +70,16 @@ function writePre(res, divClass, data) {
 function beginForm(res) {
 	res.write("<div class='container'>\n");
     res.write("<form method='POST' action='/push'>\n");
+    res.write("<div class='row'>\n");
 }   
 
 function endForm(res) {
-	res.write("<p>");
-    res.write("<input type='submit' class='btn btn-default' value='Push'>\n");
-    res.write("</p>");
+	res.write("<div class='col-md-3'style='float:right;width:390px;'>\n");
+	res.write("<h2>  <strong> Push your commits  ");
+	res.write("</strong></h2>");
+    res.write("<input type='submit' class='btn btn-default btn-lg' value='Push'/>\n");
+    res.write("</div>\n");
+    res.write("</div>\n");
     res.write("</form>\n");
     res.write("</div>\n");
 
@@ -85,13 +89,12 @@ function capitalize(str) {
     return str[0].toUpperCase() + str.slice(1);
 }
 
-function beginSelect(res, what) {
+function beginSelect(res, what,position) {
+	res.write("<div class='col-md-3' style='float:"+position+";width:390px'>\n");
     res.write("<div class='" + what + "_div'>\n");
-    res.write("<div class='row'>\n");
-    res.write("<div class='col-xs-1'>\n");
+    res.write("<h2>");
     res.write("<label for='" + what + "_select'>" + capitalize(what) + "</label>\n");
-    res.write("</div>\n");
-    res.write("<div class='col-xs-3'>\n");
+    res.write("</h2>");
     res.write("<select id='" + what + "_select' class='form-control input-lg' name='" + what + "'>\n");
 }
 
@@ -101,7 +104,6 @@ function writeOption(res, option) {
 
 function endSelect(res) {
     res.write("</select>\n");
-    res.write("</div>\n");
     res.write("</div>\n");
     res.write("</div>\n");
 }
@@ -116,7 +118,7 @@ function gitRemote(res) {
             var output = stdout.toString(),
                 remotes = output.split(/\n/);
 
-            beginSelect(res, "remote");
+            beginSelect(res, "remote","center");
 
             remotes.forEach(function(remoteName) {
                 if (remoteName) {
@@ -142,7 +144,7 @@ function gitBranch(res) {
                 branches = output.split(/\n/);
 
             beginForm(res);
-            beginSelect(res, "branch");
+            beginSelect(res, "branch","left");
 
             branches.forEach(function(branch) {
                 var branchName = branch.replace(/^\s*\*?\s*/, "").
