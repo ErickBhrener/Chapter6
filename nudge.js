@@ -74,7 +74,7 @@ function beginForm(res) {
 
 function endForm(res) {
 	res.write("<p>");
-    res.write("<input type='button' class='btn btn-default' value='Push'>\n");
+    res.write("<input type='submit' class='btn btn-default' value='Push'>\n");
     res.write("</p>");
     res.write("</form>\n");
     res.write("</div>\n");
