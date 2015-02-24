@@ -196,7 +196,7 @@ function gitPush(req, res) {
             	var tagClass1 ="<div class='container'>";
         		var tagClass2 = "</div>";
                 writeHeading(res, "h2", "Git Push",tagClass1,tagClass2);
-                writePre(res, "class='btn btn-primary btn-lg' href='#' role='button'", stdout);
+                writePre(res, "push", stdout);
             }
             gitStatus(res);
         });
